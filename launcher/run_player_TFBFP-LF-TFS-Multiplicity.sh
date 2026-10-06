@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # ライブラリパス設定
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/nestdaq/lib:$HOME/nestdaq/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NESTDAQ/lib:$NESTDAQ/lib64
 
 # トポロジーとパラメータ読み込み
 source ./topology/topo_player_TFBFP-LF-TFS-Multiplicity.sh
 source ./mq-param/mq-param_TFBFP-LF-TFS-Nothing.sh
+source ./LogicFilter/triggerlogic.sh
 
 # デバイスと数の定義
 declare -A DEVICES
@@ -35,7 +36,6 @@ for DEVICE in "${!DEVICES[@]}"; do
 done
 
 sleep 1
-source ./LogicFilter/triggerlogic.sh
 
 # 最後に tmux をアタッチ
 tmux attach-session -t $SESSION

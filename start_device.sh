@@ -4,6 +4,7 @@
 
 #libraries required
 export LD_LIBRARY_PATH=$NESTDAQ/lib64:~/usr/root/lib:$LD_LIBRARY_PATH
+export PATH="$NESTDAQ/bin:$PATH"
 
 DAQSERVICE_URI=' --registry-uri tcp://127.0.0.1:5921/0'
 METRICS_URI=' --metrics-uri tcp://127.0.0.1:5921/1'

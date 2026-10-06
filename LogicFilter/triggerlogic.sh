@@ -30,24 +30,39 @@ function param1 () {
 #redis-cli -u $server hset parameters:LogicFilter trigger-formula "RPN 0 1 & 2 3 & | 4 5 & | 6 7 & 8 9 & | &"
 #redis-cli -u $server hset parameters:LogicFilter trigger-formula "((0 & 1) | (2 & 3) | (4 & 5))  & ((6 & 7) | (8 & 9))"
 
-#"(0xc0a802a9  8 0) (0xc0a802a9 10 0)
-#"(0 & 1) & (2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13)"
+# "(0xc0a802a9  8 0) (0xc0a802a9 10 0)
+# "(0 & 1) & (2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13)"
 
+# New LogicFilter
+# redis-cli -u $server hset parameters:LogicFilter trigger-signals \
+# "(0 0xc0a802a9  8 0) (1 0xc0a802a9 10 0) \
+#  (2-0 0xc0a802aa 16 -12) (2-0 0xc0a802aa 17 -12) (2-1 0xc0a802aa 18 -12) (2-1 0xc0a802aa 19 -12) \
+#  (2-2 0xc0a802aa 20 -12) (2-2 0xc0a802aa 21 -12) (2-3 0xc0a802aa 22 -12) (2-3 0xc0a802aa 23 -12) \
+#  (2-4 0xc0a802aa 24 -12) (2-4 0xc0a802aa 25 -12) (2-5 0xc0a802aa 27 -12) (2-5 0xc0a802aa 28 -12)"
+# redis-cli -u $server hset parameters:LogicFilter trigger-expression \
+# "(0 & 1) & 2"
+
+# Conventional
 redis-cli -u $server hset parameters:LogicFilter trigger-signals \
-"(0xc0a802a9  8 0) (0xc0a802a9 10 0) \
- (0xc0a802aa 16 -12) (0xc0a802aa 17 -12) (0xc0a802aa 18 -12) (0xc0a802aa 19 -12) \
- (0xc0a802aa 20 -12) (0xc0a802aa 21 -12) (0xc0a802aa 22 -12) (0xc0a802aa 23 -12) \
- (0xc0a802aa 24 -12) (0xc0a802aa 25 -12) (0xc0a802aa 27 -12) (0xc0a802aa 28 -12)"
-
-#redis-cli -u $server hset parameters:LogicFilter trigger-signals \
-#"(0xc0a802a9  8  0) (0xc0a802a9 10  0) \
-# (0xc0a802aa 16  0) (0xc0a802aa 17  0) (0xc0a802aa 18  0) (0xc0a802aa 19  0) \
-# (0xc0a802aa 20  0) (0xc0a802aa 21  0) (0xc0a802aa 22  0) (0xc0a802aa 23  0) \
-# (0xc0a802aa 24  0) (0xc0a802aa 25  0) (0xc0a802aa 27  0) (0xc0a802aa 28  0)"
-
-
-redis-cli -u $server hset parameters:LogicFilter trigger-formula \
+"(0 0xc0a802a9  8  0) (1 0xc0a802a9 10  0) \
+(2 0xc0a802aa 16  -12) (3 0xc0a802aa 17  -12) (4 0xc0a802aa 18  -12) (5 0xc0a802aa 19  -12) \
+(6 0xc0a802aa 20  -12) (7 0xc0a802aa 21  -12) (8 0xc0a802aa 22  -12) (9 0xc0a802aa 23  -12) \
+(10 0xc0a802aa 24  -12) (11 0xc0a802aa 25  -12) (12 0xc0a802aa 27  -12) (13 0xc0a802aa 28  -12)"
+redis-cli -u $server hset parameters:LogicFilter trigger-expression \
 "(0 & 1) & (2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13)"
+
+# # Test UTOF
+# redis-cli -u $server hset parameters:LogicFilter trigger-signals \
+# "(0 0xc0a802a9  8  0) (1 0xc0a802a9 10  0)"
+# redis-cli -u $server hset parameters:LogicFilter trigger-expression \
+# "0 & 1"
+
+# # ConventionalTest UTOF
+# redis-cli -u $server hset parameters:LogicFilter trigger-signals \
+# "(0xc0a802a9  8  0) (0xc0a802a9 10  0)"
+# redis-cli -u $server hset parameters:LogicFilter trigger-formula \
+# "0 & 1"
+
 #redis-cli -u $server hset parameters:LogicFilter trigger-formula \
 #"RPN 0 1 &  2 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | & 12 ! & 13 ! &"
 

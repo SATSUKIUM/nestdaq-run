@@ -2,6 +2,7 @@
 
 # ライブラリパス設定
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NESTDAQ/lib:$NESTDAQ/lib64
+export PATH="$NESTDAQ/bin:$PATH"
 
 # トポロジーとパラメータ読み込み
 source ./topology/topo_player_TFBFP-LF-TFS-Multiplicity.sh

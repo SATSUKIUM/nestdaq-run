@@ -18,9 +18,11 @@ $NESTDAQ/bin/redis-cli -u $server  flushdb
 # param FileSink-0 multipart true openmode append path /home/kashima/run/test_export ext .dat
 
 # param TFBFilePlayer-0 in-file run000400.dat wait 1000
-# wait 1000 は1メッセージごとに1000 ms待つ設定のようだ。
+# wait 1000 は1メッセージごとに1000 ms待つ
 #param TFBFilePlayer in-file data/run000400.dat verbosity veryhigh wait 0
-param TFBFilePlayer-0 in-file data/run000602.dat wait 0 max-iterations 2000
+param TFBFilePlayer-0 in-file ./data/run000400.dat wait 0 max-iterations 20000
+# param TFBFilePlayer-0 in-file ../rawdata/run000400.dat
+
 # param TFBFilePlayer-0 in-file data/run000602.dat wait 0
 # <<の前に'#'を置くとコメントアウト解除
 << "#COMMENT"
@@ -58,5 +60,11 @@ param TFBFilePlayer-19 in-file data/run000687.dat verbosity veryhigh wait 0
 # 注意 TFSのtime-offsetは4 ns単位で書かれています。LogicFilterのLUTに合わせる思想だと思います。
 param TimeFrameSlicerByLogicTiming  time-offset-begin  "-250"  time-offset-end "250"
 
-param FileSink multipart true openmode append prefix /home/nestdaq/kashima/run/FILESINK ext .dat
-# param FileSink multipart true openmode append prefix /dev/null ext .dat
+# param FileSink multipart true openmode append prefix /home/nestdaq/kashima/run/FILESINK ext .dat
+param FileSink multipart true openmode append prefix /dev/null ext .dat
+
+# param FilterTimeFrameSliceByTrack  chmap-data-file ./mapdata_T103_20260404.csv
+param FilterTimeFrameSliceByTrack  chmap-data-file ./mapdata_T103_20260909.csv
+param FilterTimeFrameSliceByTrack  geometry-file ./detector_configurations/param_DetGeom001
+param FilterTimeFrameSliceByTrack  dctdc-calib-file ./detector_configurations/param_DCTdcCalib_run0602
+param FilterTimeFrameSliceByTrack  dc-drift-param-file ./detector_configurations/param_DCDrift_run0602

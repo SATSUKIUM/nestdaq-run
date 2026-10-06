@@ -20,7 +20,7 @@ $NESTDAQ/bin/redis-cli -u $server  flushdb
 # param TFBFilePlayer-0 in-file run000400.dat wait 1000
 # wait 1000 は1メッセージごとに1000 ms待つ
 #param TFBFilePlayer in-file data/run000400.dat verbosity veryhigh wait 0
-param TFBFilePlayer-0 in-file ./data/run000400.dat wait 0 max-iterations 20000
+param TFBFilePlayer-0 in-file ./data/run000400.dat wait 0 max-iterations 2000
 # param TFBFilePlayer-0 in-file ../rawdata/run000400.dat
 
 # param TFBFilePlayer-0 in-file data/run000602.dat wait 0

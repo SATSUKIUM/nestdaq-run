@@ -15,9 +15,9 @@ tmux new-session -d -s $SESSION -n devices
 # "デバイス名 起動数"
 DEVICES=(
     "TFBFilePlayer 1"
-    "LogicFilter 3"
-    "TimeFrameSlicerByLogicTiming 3"
-    "FilterTimeFrameSliceByTrack 8"
+    "LogicFilter 1"
+    "TimeFrameSlicerByLogicTiming 1"
+    "FilterTimeFrameSliceByTrack 1"
     "FileSink 1"
 )
 

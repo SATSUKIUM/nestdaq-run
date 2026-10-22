@@ -23,6 +23,15 @@ $NESTDAQ/bin/redis-cli -u $server  flushdb
 # param TFBFilePlayer-0 in-file ./data/run000400.dat wait 0 max-iterations 20000
 param TFBFilePlayer-0 in-file ./data/run000400.dat max-iterations 20000 wait 0
 param LogicFilter hbf-batch-size 4
+# Optional per-instance GPU assignment; enable only when preparing the next measurement.
+# Empty/unset cuda-visible-devices preserves the inherited CUDA_VISIBLE_DEVICES.
+# param LogicFilter-0 cuda-visible-devices 0
+# param LogicFilter-1 cuda-visible-devices 1
+# UUID example: replace with a GPU UUID on the execution host (do not reuse another PC's UUID).
+# param LogicFilter-0 cuda-visible-devices GPU-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+# A common "param LogicFilter cuda-visible-devices 0" assigns ALL instances to GPU 0.
+# Comma-separated lists expose devices; LogicFilter uses the first, without parallel distribution.
+# Changing visibility after INIT TASK requires restarting the process.
 # param TFBFilePlayer-0 in-file ../rawdata/run000400.dat
 
 # param TFBFilePlayer-0 in-file data/run000602.dat wait 0
